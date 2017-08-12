@@ -1,0 +1,8 @@
+以下のコードはコンパイルエラーになりません。なぜでしょう？
+
+val m = Map(1->"one", 2->"two")
+val mOpt: Option[Map[Int, String]] = Some(m)
+mOpt.get(1) // "one"が来る
+
+mOpt.get(1)のget(1)はOptionのgetで取ってきた値、Mapに対して(1)、apply(1)を実行しているから。
+Mapのapply()関数は引数をkeyとするvalueを取ってくるため、Optionに入れて返されないので、出力はString型の戻り値になる。
