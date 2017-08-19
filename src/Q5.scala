@@ -5,10 +5,10 @@
 object Q5 extends App {
 
   def passStudents(scores: Map[String, Map[String, Int]]) = {
-    var passedStudent : Map[String, Int] = Map()
+    val passedStudent : scala.collection.mutable.Map[String, Int] = scala.collection.mutable.Map()
     for (student <- scores){
-      var mathScore : Option[Int] = student._2.get("math")
-      var englishScore : Option[Int] = student._2.get("english")
+      val mathScore : Option[Int] = student._2.get("math")
+      val englishScore : Option[Int] = student._2.get("english")
       if(mathScore.isDefined && englishScore.isDefined && (mathScore.get + englishScore.get)/2 >= 80)
         passedStudent += (student._1 -> (mathScore.get + englishScore.get)/2)
     }
