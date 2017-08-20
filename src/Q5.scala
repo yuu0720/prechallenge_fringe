@@ -5,13 +5,12 @@
 object Q5 extends App {
 
   def passStudents(scores: Map[String, Map[String, Int]]) = {
-    val passedStudent : scala.collection.mutable.Map[String, Int] = scala.collection.mutable.Map()
-    for (student <- scores){
-      val mathScore : Option[Int] = student._2.get("math")
-      val englishScore : Option[Int] = student._2.get("english")
-      if(mathScore.isDefined && englishScore.isDefined && (mathScore.get + englishScore.get)/2 >= 80)
-        passedStudent += (student._1 -> (mathScore.get + englishScore.get)/2)
+    //    val passedStudent : Map[String, Int] = for (student <- scores if ((student._2.getOrElse("math", 0)+student._2.getOrElse("english", 0))/2) > 80) yield {
+    val passedStudent: Map[String, Int] = for (student <- scores; average = (student._2.getOrElse("math", 0) + student._2.getOrElse("english", 0)) / 2
+                                               if average >= 80) yield {
+      student._1 -> average
     }
+
     passedStudent
   }
 
@@ -25,5 +24,5 @@ object Q5 extends App {
     "shiro" -> Map("math" -> 99, "social" -> 81),
     "hanako" -> Map("math" -> 84, "english" -> 78, "social" -> 66))
 
-  println(passStudents(scores))  // Map(ichiro -> 90, hanako -> 81)が返る
+  println(passStudents(scores)) // Map(ichiro -> 90, hanako -> 81)が返る
 }
